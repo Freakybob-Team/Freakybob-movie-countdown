@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreakyBob Movie Countdown</title>
+    <meta name="description" content="The Countdown for the Freakybob movie! Only in Theaters 4/1/2025.">
+    <meta name="author" content="The Freakybob Team">
+    <meta name="theme-color" content="#09889e">
+    <style>
+        body {
+            font-family: 'Impact', sans-serif;
+            text-align: center;
+            background-image: url('https://i.pinimg.com/736x/b9/54/cf/b954cf350a97a84638621139e576b004.jpg');
+            background-size: cover;
+            background-position: center;
+            background-color: #034a57;
+            background-repeat: no-repeat;
+            color: #09889e;
+            padding-top: 150px;
+            margin: 0;
+            background-blend-mode: multiply;
+            
+        }
+
+        h1 {
+            font-size: 4em;
+            letter-spacing: 5px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 50px;
+            animation: fadeInTitle 2s ease-in-out;
+        }
+
+        #countdown {
+            margin-top: 20px;
+            font-size: 5em;
+            color: #ff0000;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            animation: fadeInCountdown 2s ease-in-out;
+            z-index: 199;
+        }
+
+        #popup {
+            height: 0px;
+            width: auto;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            border-radius: 10px;
+            animation: fadeInPopup 1s ease-in-out;
+        }
+
+        #popup img {
+            margin-top: 104px;
+            width: 40%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        #popup img:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: all 0.3s ease-in-out;
+        }
+        #freaky {
+            box-shadow: #cbe105;
+            position: fixed;
+            top: 0;
+           margin-left: -70px;
+            border-radius: 7px;
+            color: #cbe105;
+            background-color: #025f70;
+            border: none;
+        }
+        #freaky:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: all 0.3s ease-in-out;
+        }
+        @keyframes fadeInTitle {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInCountdown {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInPopup {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            #countdown {
+                font-size: 3em;
+            }
+
+            #popup img {
+                width: 400%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://freakybob.site"><button id="freaky">Go to Freakybob.site!</button></a>
+    <div id="overlay"></div>
+    <h1>Freakybob Movie Countdown</h1>
+    <p>The Movie is coming 4/1/2025!!!! I'm genuinely so happy :sob: like how did we even pull this off????</p>
+    <div id="countdown"></div>
+    <div id="popup">
+        <!--Heyyyyooooo, Make sure the change this so that when we have the poster or something of the movie, we'll put it right here.-->
+        <!--ALSOSFKJELDF make sure that we change the link to the trailer cause maybe they'll want to see the trailer LMAO, greg greg !!!-->
+        <a href="https://youtube.com"><img src="https://storage.ko-fi.com/cdn/useruploads/post/d06935a5-a2e3-4c23-91df-952a086c2407_boykisser_preview_1.png" alt="The Picture greg"></a>
+    </div>
+
+   
+    <audio id="tickSound">
+        <source src="Tick-sound.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        const popup = document.getElementById('popup');
+        const tickSound = document.getElementById('tickSound');
+
+        
+        const targetDate = new Date('April 1, 2025 00:00:00').getTime();
+
+       
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            
+            tickSound.play();
+
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "It's out!!!!!";
+                popup.style.display = 'block';
+            }
+        }
+
+       
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
